@@ -19,6 +19,22 @@ else:
     within 250 words. Please provide the summary of the text given here:  
     """
 
+# Configure the generative AI model with the API key
+    
+    fields = {
+            "temperature": 1,
+            "top_p": 0.95,
+            "top_k": 64,
+            "max_output_tokens": 8192,
+            #"response_mime_type": "text/plain"
+        }
+
+        # Assuming GenerativeModel is the correct class to use
+    llm = genai.GenerativeModel(
+            model_name="gemini-1.5-pro",
+            generation_config=fields
+        )
+
 
 ## getting the transcript data from yt videos
 def extract_transcript_details(youtube_video_url):
@@ -36,11 +52,14 @@ def extract_transcript_details(youtube_video_url):
     except Exception as e:
         raise e
     
+   
+
+    
 ## getting the summary based on Prompt from Google Gemini Pro
 def generate_gemini_content(transcript_text,prompt):
 
-    model=genai.GenerativeModel("gemini-pro")
-    response=model.generate_content(prompt+transcript_text)
+    #model=genai.GenerativeModel("gemini-pro")
+    response=llm.generate_content(prompt+transcript_text)
     return response.text
 
 st.header('YouTube Transcript to Detailed Notes Converter:beginner:', divider='rainbow')
