@@ -2,6 +2,11 @@ import streamlit as st
 import google.generativeai as genai
 import os
 from youtube_transcript_api import YouTubeTranscriptApi
+from dotenv import load_dotenv
+
+
+load_dotenv() ##load all the nevironment variables
+
 
 # Load the API key from environment variables
 key = os.getenv("Gemini_API_Key")
