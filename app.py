@@ -1,7 +1,7 @@
 import streamlit as st
 import google.generativeai as genai
 import os
-from youtube_transcript_api import YouTubeTranscriptApi, CouldNotRetrieveTranscript
+from youtube_transcript_api import YouTubeTranscriptApi
 
 # Load the API key from environment variables
 key = os.getenv("Gemini_API_Key")
@@ -13,25 +13,14 @@ else:
     # Configure the generative AI model with the API key
     genai.configure(api_key=key)
 
-    fields = {
-        "temperature": 1,
-        "top_p": 0.95,
-        "top_k": 64,
-        "max_output_tokens": 8192,
-        "response_mime_type": "text/plain"
-    }
-
-    # Assuming GenerativeModel is the correct class to use
-    llm = genai.GenerativeModel(
-        model_name="gemini-1.5-pro",
-        generation_config=fields
-    )
-
-    prompt = """You are a YouTube video summarizer. You will be taking the transcript text
+    prompt = """
+    You are a YouTube video summarizer. You will be taking the transcript text
     and summarizing the entire video and providing the important summary in points
-    within 250 words. Please provide the summary of the text given here:  """
+    within 250 words. Please provide the summary of the text given here:  
+    """
 
-   ## getting the transcript data from yt videos
+
+## getting the transcript data from yt videos
 def extract_transcript_details(youtube_video_url):
     try:
         video_id=youtube_video_url.split("=")[1]
@@ -69,7 +58,3 @@ if st.button("Get Detailed Notes"):
         summary=generate_gemini_content(transcript_text,prompt)
         st.markdown("## Detailed Notes:")
         st.write(summary)
-
-
-
-
