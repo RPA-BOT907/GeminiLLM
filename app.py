@@ -77,3 +77,7 @@ if st.button("Get Detailed Notes"):
         summary=generate_gemini_content(transcript_text,prompt)
         st.markdown("## Detailed Notes:")
         st.write(summary)
+
+
+if __name__ == "__main__":
+    main()
