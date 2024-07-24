@@ -67,17 +67,31 @@ def generate_gemini_content(transcript_text,prompt):
     response=llm.generate_content(prompt+transcript_text)
     return response.text
 
+
+st.set_page_config(
+    page_title="AI Detailed Notes Converter",  # Sets the title of the web page
+    page_icon="🤖",  # Sets the icon displayed in the browser tab
+    #layout="wide"  # Sets the layout of the page to be wide
+)
+
+
 st.header('YouTube Transcript to Detailed Notes Converter:beginner:', divider='rainbow')
 youtube_link = st.text_input("Enter YouTube Video Link:")
 
+
+#youtube video thumbnail display on screen.
 if youtube_link:
     video_id = youtube_link.split("=")[1]
     print(video_id)
     st.image(f"http://img.youtube.com/vi/{video_id}/0.jpg", use_column_width=True)
 
+
+#button creation
 if st.button("Get Detailed Notes"):
     transcript_text=extract_transcript_details(youtube_link)
 
+
+#call enerate_gemini_content method
     if transcript_text:
         summary=generate_gemini_content(transcript_text,prompt)
         st.markdown("## Detailed Notes:")
