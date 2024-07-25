@@ -5,6 +5,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from dotenv import load_dotenv
 
 
+
 load_dotenv() ##load all the nevironment variables
 
 
@@ -21,7 +22,7 @@ else:
     prompt = """
     You are a YouTube video summarizer. You will be taking the transcript text
     and summarizing the entire video and providing the important summary in points
-    within 500 words. Please provide the summary of the text given here:  
+    within 300 words. Please provide the summary of the text given here:  
     """
 
 # Configure the generative AI model with the API key
@@ -98,11 +99,10 @@ if st.button("Get Detailed Notes"):
         st.markdown("## Detailed Notes:")
         st.write(summary)
     
-
 def reset():
-    st.session_state.youtube_link = ""
-    st.session_state.transcript_text = ""
-    st.session_state.summary = ""
+    st.experimental_rerun()
+st.cache_data.clear()
+st.session_state.image = None
 
 if st.button("Reset"):
-    reset()
+     reset()
