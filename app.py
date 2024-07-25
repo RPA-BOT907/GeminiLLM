@@ -21,7 +21,7 @@ else:
     prompt = """
     You are a YouTube video summarizer. You will be taking the transcript text
     and summarizing the entire video and providing the important summary in points
-    within 250 words. Please provide the summary of the text given here:  
+    within 500 words. Please provide the summary of the text given here:  
     """
 
 # Configure the generative AI model with the API key
@@ -91,8 +91,18 @@ if st.button("Get Detailed Notes"):
     transcript_text=extract_transcript_details(youtube_link)
 
 
+
 #call enerate_gemini_content method
     if transcript_text:
         summary=generate_gemini_content(transcript_text,prompt)
         st.markdown("## Detailed Notes:")
         st.write(summary)
+    
+
+def reset():
+    st.session_state.youtube_link = ""
+    st.session_state.transcript_text = ""
+    st.session_state.summary = ""
+
+if st.button("Reset"):
+    reset()
