@@ -75,7 +75,7 @@ st.set_page_config(
 )
 
 
-st.header('YouTube Transcript to Detailed Notes Converter:beginner:', divider='rainbow')
+st.header('Detailed Notes Creation:beginner:', divider='rainbow')
 youtube_link = st.text_input("Enter YouTube Video Link:")
 
 
